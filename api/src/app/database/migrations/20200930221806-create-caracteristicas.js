@@ -12,7 +12,7 @@ module.exports = {
       trilha_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        //! cria uma referencia com trilhas
+        //! cria uma referencia com users
         references: { model: 'trilha', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
@@ -49,6 +49,8 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
+    
     return queryInterface.dropTable('caracteristicas');
+  
   }
 };

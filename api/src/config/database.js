@@ -1,12 +1,14 @@
-//! OBJETO DE CONFIGURACAO DO BANCO DE DADOS
 module.exports = {
-    dialect: 'postgres',
-    host: 'localhost',
-    username: 'postgres',
-    password: '123',
-    database: 'manejo',
-    define: {
-        timestamps: true,
-        underscored: true
-    }
+
+  username: "postgres",
+  password: "123",
+  database: "database_manejo",
+  host: "127.0.0.1",
+  dialect: "postgres",
+  operetorsAliases: false,
+  define:{
+    timestamps: true,
+    underscored: true,
+    underscoredAll: true
+  }
 }

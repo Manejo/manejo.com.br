@@ -1,0 +1,35 @@
+.top-card{
+    text-align: center;
+    background-image: url(../assets/background.png);
+    background-size: 100%;
+    color: #f2f2f2;
+}
+.q-pa-md{
+    width: 25%;
+    padding: 50px;
+}
+.card{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn{
+    padding: 10px 10px;
+    margin: 0 10px;
+    border-radius: 8px;
+    border: 0;
+    background-color: #186128;
+    color: #f2f2f2;
+}
+.sub_menu{
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.fundo_table{
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    background-color: #c4c4c4ad;
+}

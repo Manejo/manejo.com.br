@@ -1,0 +1,35 @@
+.layout{
+    background-image: url(../assets/background.png);
+    background-size: 100vw 100vh;
+    background-position: center;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 100vh;
+}
+.header{
+    background-color: #f2f2f248;
+    padding: 8px;
+    position: relative;
+    padding-left: 30px;
+    padding-right: 20px;
+    color: #ffffff;
+    display: flex;
+    width: 100%;
+}
+.btn_menu{
+    text-shadow: 0 4px 8px #272727;
+    margin-left: 8px;
+    margin-right: 8px;
+    color: #ffffff;
+    font-size: 5pt;
+    border-radius: 8px;
+}
+.btn_menu:hover{
+    border-bottom: 3px solid #ffffff;
+}
+.router{
+    height: 55rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

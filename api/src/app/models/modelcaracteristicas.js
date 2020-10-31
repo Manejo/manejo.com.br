@@ -4,19 +4,20 @@ class Caracteristicas extends Model {
     static init(sequelize){
         super.init(
             {
+                trilha_id: DataTypes.INTEGER,
                 capacidade: DataTypes.INTEGER,
                 dificuldade: DataTypes.STRING,
-                regularidade: DataTypes.INTEGER,
+                regularidade: DataTypes.STRING,
                 comprimento: DataTypes.FLOAT,
                 largura: DataTypes.FLOAT,
-                status: DataTypes.INTEGER
+                status: DataTypes.STRING
             }, {
                 sequelize
             }
         )
     }
     static associate(models) {
-        this.belongsTo(models.Trilha, { foreignKey: 'trilha_id', as: 'trilha'})
+        this.belongsTo(models.Trilha, { foreignKey: 'id', as: 'trilhas'})
     }
 }
 

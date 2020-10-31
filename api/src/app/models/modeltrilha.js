@@ -12,8 +12,8 @@ class Trilha extends Model {
         )
     }
     static associate(models) {
-        //! um User tem muitos Adresses
-        this.hasMany(models.Trilha, { foreignKey: 'trilha_id', as: 'trilha'})
+        
+        this.hasMany(models.Trilha, { foreignKey: 'id', as: 'trilhas'})
     }
 }
 

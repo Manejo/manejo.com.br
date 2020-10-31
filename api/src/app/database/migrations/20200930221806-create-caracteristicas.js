@@ -13,7 +13,7 @@ module.exports = {
         type: Sequelize.INTEGER,
         allowNull: false,
         //! cria uma referencia com users
-        references: { model: 'trilha', key: 'id' },
+        references: { model: 'trilhas', key: 'id' },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE'
       },
@@ -42,6 +42,10 @@ module.exports = {
         allowNull: false
       },
       created_at: {
+        type: Sequelize.DATE,
+        allowNull: false
+      },
+      updated_at: {
         type: Sequelize.DATE,
         allowNull: false
       }

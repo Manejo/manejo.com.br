@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div id="app">
     <div class="header">
         <a href="/">
           <q-avatar rounded>
@@ -15,18 +15,19 @@
         <q-space/>
         <q-btn flat padding="8px 10px" label="Entrar" to="/" />
     </div>
-    <br>
-    <div class="router">
-      <router-view />
+    <div class="layout">
+      <router-view>
+
+      </router-view>
     </div>
   </div>
 </template>
 <script>
   require('./styles/layout.css');
 export default {
-  name: 'LayoutDefault',
+  name: 'App',
   components: {
-
+    
   }
 }
 </script>

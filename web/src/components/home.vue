@@ -1,8 +1,7 @@
 <template>
   <div class="car_div">
-    <h1 class="home_title">Manejo</h1>
     <div class="car">
-        <q-carousel class="corrousel"
+        <q-carousel class="corousel"
         animated
         v-model="slide"
         navigation

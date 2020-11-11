@@ -1,21 +1,19 @@
-.top-card{
-    text-align: center;
-    background-image: url(../assets/background.png);
-    background-size: 100%;
-    color: #f2f2f2;
-    height: 120px;
+.formulario{
+    background-color: none;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
-a{
-    text-decoration: none;
-}
-.trilhas{
+.form-trilha{
     display: flex;
     flex-grow: 1;
-    margin: 40px 0;
+}
+.q-input{
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    margin: 12px 0 12px 0;
+    width: 100%;
 }
 .btn{
     width: 100%;
@@ -37,13 +35,32 @@ a{
     min-height: 100%;
     width: 20rem;
     min-height: 100%;
-    border-radius: 0 5px 5px 0;
+    border-radius: 0 10px 10px 0;
     background-color: #c4c4c4ad;
 }
 .fundo_cards{
-    border-radius: 5px 0 0 5px;
+    border-radius: 10px 0 0 10px;
     margin-left: 10px;
     padding: 20px;
     width: 100%;
     background-color: #c4c4c4ad;
+}
+.add-coordenada{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cont-col1{
+    margin: 40px;
+    border-radius: 50px;
+}
+.cont-col2{
+    margin: 40px;
+    border-radius: 50px;
 }

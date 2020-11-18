@@ -10,7 +10,8 @@ module.exports = {
         comprimento: 40,
         largura: 10,
         status: 'ativo',
-        created_at: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         trilha_id: 1
       },
       {
@@ -20,7 +21,8 @@ module.exports = {
         comprimento: 40,
         largura: 10,
         status: 'ativo',
-        created_at: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         trilha_id: 2
       },
       {
@@ -30,7 +32,8 @@ module.exports = {
         comprimento: 40,
         largura: 10,
         status: 'ativo',
-        created_at: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
         trilha_id: 3
       }
     ], {});

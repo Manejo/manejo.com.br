@@ -1,9 +1,11 @@
 import Vue from 'vue'
-import App from './App.vue'
+import App from './App'
 import router from './router/routes'
 import './quasar'
 import VueGeolocation from 'vue-browser-geolocation'
+import axios from 'axios'
 
+Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(VueGeolocation)
 

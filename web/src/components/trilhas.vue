@@ -29,14 +29,14 @@
     </button>
   </div>
   <div class="fundo_cards">
-    <div class="container">
+    <div v-for="dados in trilha_dados" :key="dados.trilha_id" class="container">
       <div class="row">
         <div class="col-12 col-sm-6 col-lg-4 q-pa-md">
-          <a href="/trilhas">
-          <q-card class="my-card">
+          <a href="/trilhas/visualizartrilha">
+          <q-card clickable v-ripple class="shadow-2 q-mb-sm">
             <q-card-section class="top-card">
-              <div class="text-h6">Chapel do sol</div>
-              <div class="text-subtitle2">Ativa</div>
+              <div class="text-h6">{{ dados.nome }}</div>
+              <div class="text-subtitle2">{{ dados.status }}</div>
             </q-card-section>
           </q-card>
           </a>
@@ -52,12 +52,33 @@ export default {
   name: 'trilhas',
   data() {
     return {
-      name: null,
+      error_message: null,
+      trilhas: [],
+      caracteristicas: [],
+      trilha_dados: []
     };
   },
-  components: {
-  
+  methods: {
+    async loadTrilhas () {
+
+      await this.$axios.get('http://localhost:3333/trilhas').then(response => {
+        this.trilhas = response.data
+      }).catch(response => (this.error_message = response))
+
+
+      await this.$axios.get('http://localhost:3333/caracteristicas').then(response => {
+        this.caracteristicas = response.data
+      }).catch(response => (this.error_message = response))
+
+      this.trilha_dados = this.caracteristicas.map((caracteristica) => ({
+        ...this.trilhas.find((o) => o.id === caracteristica.trilha_id),
+        ...caracteristica
+      }));
+    }
   },
+  beforeMount () {
+    this.loadTrilhas()
+  }
 }
 </script>
 

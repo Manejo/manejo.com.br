@@ -15,6 +15,7 @@
     "quasar": "^1.0.0",
     "vue": "^2.6.11",
     "vue-router": "^3.4.7",
+    "vue-simple-alert": "^1.1.1",
     "vue2-google-maps": "^0.10.7",
     "vuejs-google-maps": "^0.0.10"
   },

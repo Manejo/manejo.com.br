@@ -68,7 +68,7 @@ export default {
 
       await this.$axios.get('http://localhost:3333/caracteristicas').then(response => {
         this.caracteristicas = response.data
-      }).catch(response => (this.error_message = response))
+      }).catch(response => (this.error_message += response))
 
       this.trilha_dados = this.caracteristicas.map((caracteristica) => ({
         ...this.trilhas.find((o) => o.id === caracteristica.trilha_id),

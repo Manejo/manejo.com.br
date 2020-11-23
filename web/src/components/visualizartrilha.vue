@@ -28,82 +28,82 @@
               <div class="formulario">
                 <q-input
                   class="inputs"
+                  disable
                   standout="bg-primary text-white"
-                  v-model="name"
-                  label="Nome"
+                  :label="trilha_dados.nome"
                 />
                 <q-input
                   class="inputs"
+                  disable
                   standout="bg-primary text-white"
-                  v-model="status"
-                  label="Status"
+                  :label="trilha_dados.status"
                 />
                 <q-input
                   class="inputs"
+                  disable
                   standout="bg-primary text-white"
-                  v-model="regularidade"
-                  label="Regularidade"
+                  :label="trilha_dados.regularidade"
                 />
                 <q-input
                   class="inputs"
+                  disable
                   standout="bg-primary text-white"
-                  v-model="capacidade"
-                  label="Capacidade"
+                  :label="trilha_dados.capacidade"
                 />
                 <q-input
                   class="inputs"
+                  disable
                   standout="bg-primary text-white"
-                  v-model="dificuldade"
-                  label="Dificuldade"
+                  :label="trilha_dados.dificuldade"
                 />
                 <q-input
                   class="inputs"
+                  disable
                   standout="bg-primary text-white"
-                  v-model="comprimento"
-                  label="Comprimento"
+                  :label="trilha_dados.comprimento"
                 />
                 <q-input
                   class="inputs"
+                  disable
                   standout="bg-primary text-white"
-                  v-model="largura"
-                  label="Largura"
+                  :label="trilha_dados.largura"
                 />
                 <div class="add-coordenada">
                   <q-input
                     class="inputs"
+                    disable
                     standout="bg-primary text-white"
-                    v-model="coordenada1"
-                    label="Coordenada1"
+                    :label="trilha_dados.coordenadas.split(';')[0]"
                     style="margin-right: 10px;"
                   />
                   <q-input
                     class="inputs"
+                    disable
                     standout="bg-primary text-white"
-                    v-model="coordenada2"
-                    label="Coordenada2"
+                    :label="trilha_dados.coordenadas.split(';')[1]"
                     style="margin-left: 10px;"
                   />
                 </div>
                 <div class="add-coordenada">
                   <q-input
                     class="inputs"
+                    disable
                     standout="bg-primary text-white"
-                    v-model="coordenada3"
-                    label="Coordenada3"
+                    :label="trilha_dados.coordenadas.split(';')[0]"
                     style="margin-right: 10px;"
                   />
                   <q-input
                     class="inputs"
+                    disable
                     standout="bg-primary text-white"
-                    v-model="coordenada4"
-                    label="Coordenada4"
+                    :label="trilha_dados.coordenadas.split(';')[1]"
                     style="margin-left: 10px;"
                   />
                 </div>
               </div>
             </div>
             <div class="cont-col2 col-12 col-sm-5 col-lg-5 q-pa-md">
-              <Map/>
+              <Map />
             </div>
           </div>
         </div>
@@ -113,14 +113,20 @@
 </template>
 <script>
 require("../styles/visualizartrilha.css");
-import Map from './Map';
+import Map from "./Map";
 export default {
   name: "visualizartrilha",
   components: {
-    Map
+    Map,
   },
   data() {
     return {
+      trilha: null,
+      caracteristica: null,
+      error_message: null,
+      trilha_dados: {},
+      //
+      //
       name: null,
       status: null,
       regularidade: null,
@@ -155,22 +161,46 @@ export default {
     },
 
     onReset() {
-      this.name = null;
-      this.status = null;
-      this.regularidade = null;
-      this.capacidade = null;
-      this.dificuldade = null;
-      this.comprimento = null;
-      this.largura = null;
-      this.coordenada1 = null;
-      this.coordenada2 = null;
-      this.coordenada3 = null;
-      this.coordenada4 = null;
+      this.$confirm("Você tem certeza que deseja excluir essa trilha?").then(
+        async () => {
+          await this.$axios
+            .delete("http://localhost:3333/trilhas/6")
+            .then(() => {
+              this.$alert("Trilha excluida com sucesso.");
+            })
+            .catch((response) => this.$alert(response));
+        }
+      );
     },
     getUrl(files) {
       return `http://localhost:8000/upload?count=${files.length}`;
     },
+    //
+    //
+    async loadTrilha() {
+      await this.$axios
+        .get("http://localhost:3333/trilhas/6")
+        .then((response) => {
+          this.trilha = response.data;
+        })
+        .catch((response) => (this.error_message = response));
+
+      await this.$axios
+        .get("http://localhost:3333/caracteristicas/8")
+        .then((response) => {
+          this.caracteristica = response.data;
+        })
+        .catch((response) => (this.error_message += response));
+
+      this.trilha_dados = this.caracteristica;
+
+      this.trilha_dados.trilha_id = this.trilha.id;
+      this.trilha_dados.nome = this.trilha.nome;
+      this.trilha_dados.coordenadas = this.trilha.coordenadas;
+    },
+  },
+  async beforeMount() {
+    await this.loadTrilha();
   },
 };
 </script>
-

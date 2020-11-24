@@ -167,6 +167,8 @@ export default {
             .delete("http://localhost:3333/trilhas/6")
             .then(() => {
               this.$alert("Trilha excluida com sucesso.");
+
+              this.$router.push('/trilhas');
             })
             .catch((response) => this.$alert(response));
         }
@@ -182,6 +184,12 @@ export default {
         .get("http://localhost:3333/trilhas/6")
         .then((response) => {
           this.trilha = response.data;
+
+          if(this.trilha == null) {
+            this.$alert("Não foi possível encontrar a trilha desejada.")
+            this.$router.push("/trilhas")
+          }
+
         })
         .catch((response) => (this.error_message = response));
 

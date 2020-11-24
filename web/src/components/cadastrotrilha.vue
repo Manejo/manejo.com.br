@@ -28,7 +28,7 @@
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
-                  v-model="name"
+                  v-model="nome"
                   label="Nome"
                 />
                 <q-input
@@ -167,7 +167,7 @@ export default {
   name: "trilhas",
   data() {
     return {
-      name: null,
+      nome: null,
       status: null,
       regularidade: null,
       capacidade: null,
@@ -175,26 +175,75 @@ export default {
       comprimento: null,
       largura: null,
       coordenada: null,
+      trilha: {},
+      caracteristicas: {},
+      trilha_id: null,
     };
   },
 
   methods: {
-    onSubmit() {
-      if (this.accept !== true) {
-        this.$q.notify({
-          color: "red-5",
-          textColor: "white",
-          icon: "warning",
-          message: "You need to accept the license and terms first",
-        });
+    async onSubmit() {
+      if (
+        this.nome != null &&
+        this.coordenada != null &&
+        this.capacidade != null &&
+        this.dificuldade != null &&
+        this.regularidade != null &&
+        this.comprimento != null &&
+        this.largura != null &&
+        this.status != null
+      ) {
+
+        this.trilha = {
+          nome: this.nome,
+          coordenadas: this.coordenada,
+        };
+
+        this.caracteristicas = {
+          capacidade: this.capacidade,
+          dificuldade: this.dificuldade,
+          regularidade: this.regularidade,
+          comprimento: this.comprimento,
+          largura: this.largura,
+          status: this.status,
+        };
+
+        await this.$axios
+          .post("http://localhost:3333/trilhas", this.trilha)
+          .then((response) => {
+            this.trilha_id = response.data.id;
+          })
+          .catch((response) => this.$alert(response));
+
+        await this.$axios
+          .post(
+            "http://localhost:3333/caracteristicas/" + this.trilha_id,
+            this.caracteristicas
+          )
+          .then(() => {
+            this.$alert("Cadastro efetuado com sucesso.");
+
+            this.$router.push("/trilhas");
+          })
+          .catch((response) => this.$alert(response));
       } else {
-        this.$q.notify({
-          color: "green-4",
-          textColor: "white",
-          icon: "cloud_done",
-          message: "Submitted",
-        });
+        this.$alert("Preencha todos os dados.");
       }
+      // if (this.accept !== true) {
+      //   this.$q.notify({
+      //     color: "red-5",
+      //     textColor: "white",
+      //     icon: "warning",
+      //     message: "You need to accept the license and terms first",
+      //   });
+      // } else {
+      //   this.$q.notify({
+      //     color: "green-4",
+      //     textColor: "white",
+      //     icon: "cloud_done",
+      //     message: "Submitted",
+      //   });
+      // }
     },
 
     onReset() {
@@ -213,4 +262,3 @@ export default {
   },
 };
 </script>
-

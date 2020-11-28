@@ -2,7 +2,8 @@
   <q-form @submit="onSubmit" @reset="onReset" class="form-trilha">
     <div class="trilhas">
       <div class="menu">
-        <router-link to="/trilhas/editartrilha">
+        <!-- <router-link to="/trilhas/editartrilha"> -->
+        <router-link :to="{ name: 'editartrilha', params: { id_trilha: this.trilha_id, id_caracteristica: this.caracteristica_id }}">
           <button label="Submit" type="submit" color="primary" class="btn">
             <span class="material-icons" style="height: 15px"> edit </span>
             Editar
@@ -13,7 +14,7 @@
           Excluir
         </button>
         <router-link to="/trilhas">
-          <button class="btn" ref="/trilhas">
+          <button class="btn">
             <span class="material-icons" style="height: 15px">
               keyboard_return
             </span>
@@ -125,6 +126,8 @@ export default {
       caracteristica: null,
       error_message: null,
       trilha_dados: {},
+      trilha_id: null,
+      caracteristica_id: null,
       //
       //
       name: null,
@@ -164,7 +167,7 @@ export default {
       this.$confirm("Você tem certeza que deseja excluir essa trilha?").then(
         async () => {
           await this.$axios
-            .delete("http://localhost:3333/trilhas/6")
+            .delete("http://localhost:3333/trilhas/" + this.$route.params.id_trilha)
             .then(() => {
               this.$alert("Trilha excluida com sucesso.");
 
@@ -181,7 +184,7 @@ export default {
     //
     async loadTrilha() {
       await this.$axios
-        .get("http://localhost:3333/trilhas/6")
+        .get("http://localhost:3333/trilhas/" + this.$route.params.id_trilha)
         .then((response) => {
           this.trilha = response.data;
 
@@ -194,7 +197,7 @@ export default {
         .catch((response) => (this.error_message = response));
 
       await this.$axios
-        .get("http://localhost:3333/caracteristicas/8")
+        .get("http://localhost:3333/caracteristicas/" + + this.$route.params.id_caracteristica)
         .then((response) => {
           this.caracteristica = response.data;
         })
@@ -205,6 +208,9 @@ export default {
       this.trilha_dados.trilha_id = this.trilha.id;
       this.trilha_dados.nome = this.trilha.nome;
       this.trilha_dados.coordenadas = this.trilha.coordenadas;
+
+      this.trilha_id = this.trilha_dados.trilha_id;
+      this.caracteristica_id = this.trilha_dados.id;
     },
   },
   async beforeMount() {

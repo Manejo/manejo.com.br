@@ -19,12 +19,12 @@ export default new Router({
             component: trilhas
         },
         {
-            path: '/trilhas/visualizartrilha',
+            path: '/trilhas/visualizartrilha/:id_trilha/:id_caracteristica',
             name: 'visualizartrilha',
             component: visualizartrilha
         },
         {
-            path: '/trilhas/editartrilha',
+            path: '/trilhas/editartrilha/:id_trilha/:id_caracteristica',
             name: 'editartrilha',
             component: editartrilha
         },

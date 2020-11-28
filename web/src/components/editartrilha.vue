@@ -211,7 +211,7 @@ export default {
     },
     async loadTrilha() {
       await this.$axios
-        .get("http://localhost:3333/trilhas/6")
+        .get("http://localhost:3333/trilhas/" + this.$route.params.id_trilha)
         .then((response) => {
           this.trilha = response.data;
 
@@ -223,7 +223,7 @@ export default {
         .catch((response) => (this.error_message = response));
 
       await this.$axios
-        .get("http://localhost:3333/caracteristicas/8")
+        .get("http://localhost:3333/caracteristicas/" + this.$route.params.id_caracteristica)
         .then((response) => {
           this.caracteristica = response.data;
         })

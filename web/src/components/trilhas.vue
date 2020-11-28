@@ -29,17 +29,17 @@
     </button>
   </div>
   <div class="fundo_cards">
-    <div v-for="dados in trilha_dados" :key="dados.trilha_id" class="container">
-      <div class="row">
-        <div class="col-12 col-sm-6 col-lg-4 q-pa-md">
-          <a href="/trilhas/visualizartrilha">
+    <div class="container">
+      <div class="row" >
+        <div class="col-12 col-sm-6 col-lg-4 q-pa-md" v-for="dados in trilha_dados" :key="dados.trilha_id">
+          <router-link :to="{ name: 'visualizartrilha', params: { id_trilha: dados.trilha_id, id_caracteristica: dados.id }}">
           <q-card clickable v-ripple class="shadow-2 q-mb-sm">
             <q-card-section class="top-card">
               <div class="text-h6">{{ dados.nome }}</div>
               <div class="text-subtitle2">{{ dados.status }}</div>
             </q-card-section>
           </q-card>
-          </a>
+          </router-link>
         </div>
       </div>
     </div>

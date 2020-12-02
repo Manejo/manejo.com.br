@@ -90,14 +90,14 @@
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :label="trilha_dados.coordenadas.split(';')[0]"
+                    :label="trilha_dados.coordenadas.split(';')[2]"
                     style="margin-right: 10px;"
                   />
                   <q-input
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :label="trilha_dados.coordenadas.split(';')[1]"
+                    :label="trilha_dados.coordenadas.split(';')[3]"
                     style="margin-left: 10px;"
                   />
                 </div>

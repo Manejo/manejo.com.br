@@ -126,35 +126,44 @@ export default {
       caracteristicas: {},
       //
       //
-      nome: null,
-      status: null,
-      regularidade: null,
-      capacidade: null,
-      dificuldade: null,
-      comprimento: null,
-      largura: null,
-      coordenada1: null,
-      coordenada2: null,
-      coordenada3: null,
-      coordenada4: null,
-      coordenada: null
+      nome: "",
+      status: "",
+      regularidade: "",
+      capacidade: "",
+      dificuldade: "",
+      comprimento: "",
+      largura: "",
+      coordenada1: "",
+      coordenada2: "",
+      coordenada3: "",
+      coordenada4: "",
+      coordenada: ""
     };
   },
 
   methods: {
     async onSubmit() {
 
-      this.coordenada = this.coordenada1 + ";" + this.coordenada2 + ";" + this.coordenada3 + ";" + this.coordenada4
+      this.coordenada = this.coordenada1 + ";" + this.coordenada2 + ";" + this.coordenada3 + ";" + this.coordenada4;
 
       if (
-        this.nome != null &&
-        this.coordenada != null &&
-        this.capacidade != null &&
-        this.dificuldade != null &&
-        this.regularidade != null &&
-        this.comprimento != null &&
-        this.largura != null &&
-        this.status != null
+        !this.coordenada1.length ||
+        !this.coordenada2.length ||
+        !this.coordenada3.length ||
+        !this.coordenada4.length 
+      ) {
+        this.coordenada = "";
+      }  
+
+      if (
+        this.nome.length  &&
+        this.coordenada.length  &&
+        this.capacidade.toString().length  &&
+        this.dificuldade.length  &&
+        this.regularidade.length  &&
+        this.comprimento.toString().length  &&
+        this.largura.toString().length  &&
+        this.status.length 
       ) {
         this.trilha = {
           nome: this.nome,
@@ -171,7 +180,10 @@ export default {
         };
 
         await this.$axios
-          .put("http://localhost:3333/trilhas/6", this.trilha)
+          .put(
+            "http://localhost:3333/trilhas/" + this.$route.params.id_trilha,
+            this.trilha
+          )
           .then((response) => {
             this.trilha_id = response.data.id;
           })
@@ -179,7 +191,8 @@ export default {
 
         await this.$axios
           .put(
-            "http://localhost:3333/caracteristicas/" + this.trilha_dados.id,
+            "http://localhost:3333/caracteristicas/" +
+              this.$route.params.id_caracteristica,
             this.caracteristicas
           )
           .then(() => {
@@ -189,22 +202,22 @@ export default {
           })
           .catch((response) => this.$alert(response));
       } else {
-        this.$alert("Preencha todos os dados.");
+        this.$alert("Certifique-se de não deixar nenhum campo em branco.");
       }
     },
 
     onReset() {
-      this.nome = null;
-      this.status = null;
-      this.regularidade = null;
-      this.capacidade = null;
-      this.dificuldade = null;
-      this.comprimento = null;
-      this.largura = null;
-      this.coordenada1 = null;
-      this.coordenada2 = null;
-      this.coordenada3 = null;
-      this.coordenada4 = null;
+      this.nome = "";
+      this.status = "";
+      this.regularidade = "";
+      this.capacidade = "";
+      this.dificuldade = "";
+      this.comprimento = "";
+      this.largura = "";
+      this.coordenada1 = "";
+      this.coordenada2 = "";
+      this.coordenada3 = "";
+      this.coordenada4 = "";
     },
     getUrl(files) {
       return `http://localhost:8000/upload?count=${files.length}`;
@@ -223,7 +236,10 @@ export default {
         .catch((response) => (this.error_message = response));
 
       await this.$axios
-        .get("http://localhost:3333/caracteristicas/" + this.$route.params.id_caracteristica)
+        .get(
+          "http://localhost:3333/caracteristicas/" +
+            this.$route.params.id_caracteristica
+        )
         .then((response) => {
           this.caracteristica = response.data;
         })
@@ -234,6 +250,18 @@ export default {
       this.trilha_dados.trilha_id = this.trilha.id;
       this.trilha_dados.nome = this.trilha.nome;
       this.trilha_dados.coordenadas = this.trilha.coordenadas;
+
+      this.nome = this.trilha_dados.nome;
+      this.status = this.trilha_dados.status;
+      this.regularidade = this.trilha_dados.regularidade;
+      this.capacidade = this.trilha_dados.capacidade;
+      this.dificuldade = this.trilha_dados.dificuldade;
+      this.comprimento = this.trilha_dados.comprimento;
+      this.largura = this.trilha_dados.largura;
+      this.coordenada1 = this.trilha_dados.coordenadas.split(";")[0];
+      this.coordenada2 = this.trilha_dados.coordenadas.split(";")[1];
+      this.coordenada3 = this.trilha_dados.coordenadas.split(";")[2];
+      this.coordenada4 = this.trilha_dados.coordenadas.split(";")[3];
     },
   },
   async beforeMount() {

@@ -29,58 +29,58 @@
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="nome"
-                  :label="trilha_dados.nome"
+                  :value="trilha_dados.nome"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="status"
-                  :label="trilha_dados.status"
+                  :value="trilha_dados.status"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="regularidade"
-                  :label="trilha_dados.regularidade"
+                  :value="trilha_dados.regularidade"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="capacidade"
-                  :label="trilha_dados.capacidade"
+                  :value="trilha_dados.capacidade"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="dificuldade"
-                  :label="trilha_dados.dificuldade"
+                  :value="trilha_dados.dificuldade"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="comprimento"
-                  :label="trilha_dados.comprimento"
+                  :value="trilha_dados.comprimento"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="largura"
-                  :label="trilha_dados.largura"
+                  :value="trilha_dados.largura"
                 />
                 <div class="add-coordenada">
                   <q-input
                     class="inputs"
                     standout="bg-primary text-white"
                     v-model="coordenada1"
-                    :label="trilha_dados.coordenadas.split(';')[0]"
-                    style="margin-right: 10px;"
+                    :value="this.coordenada1"
+                    style="margin-right: 10px"
                   />
                   <q-input
                     class="inputs"
                     standout="bg-primary text-white"
                     v-model="coordenada2"
-                    :label="trilha_dados.coordenadas.split(';')[1]"
-                    style="margin-left: 10px;"
+                    :value="this.coordenada2"
+                    style="margin-left: 10px"
                   />
                 </div>
                 <div class="add-coordenada">
@@ -88,15 +88,15 @@
                     class="inputs"
                     standout="bg-primary text-white"
                     v-model="coordenada3"
-                    :label="trilha_dados.coordenadas.split(';')[1]"
-                    style="margin-right: 10px;"
+                    :value="this.coordenada3"
+                    style="margin-right: 10px"
                   />
                   <q-input
                     class="inputs"
                     standout="bg-primary text-white"
                     v-model="coordenada4"
-                    :label="trilha_dados.coordenadas.split(';')[1]"
-                    style="margin-left: 10px;"
+                    :value="this.coordenada4"
+                    style="margin-left: 10px"
                   />
                 </div>
               </div>
@@ -124,46 +124,50 @@ export default {
       error_message: null,
       trilha_dados: {},
       caracteristicas: {},
-      //
-      //
-      nome: "",
-      status: "",
-      regularidade: "",
-      capacidade: "",
-      dificuldade: "",
-      comprimento: "",
-      largura: "",
-      coordenada1: "",
-      coordenada2: "",
-      coordenada3: "",
-      coordenada4: "",
-      coordenada: ""
+      nome: null,
+      status: null,
+      regularidade: null,
+      capacidade: null,
+      dificuldade: null,
+      comprimento: null,
+      largura: null,
+      coordenada1: null,
+      coordenada2: null,
+      coordenada3: null,
+      coordenada4: null,
+      coordenada: null,
     };
   },
 
   methods: {
     async onSubmit() {
-
-      this.coordenada = this.coordenada1 + ";" + this.coordenada2 + ";" + this.coordenada3 + ";" + this.coordenada4;
+      this.coordenada =
+        this.coordenada1 +
+        ";" +
+        this.coordenada2 +
+        ";" +
+        this.coordenada3 +
+        ";" +
+        this.coordenada4;
 
       if (
         !this.coordenada1.length ||
         !this.coordenada2.length ||
         !this.coordenada3.length ||
-        !this.coordenada4.length 
+        !this.coordenada4.length
       ) {
         this.coordenada = "";
-      }  
+      }
 
       if (
-        this.nome.length  &&
-        this.coordenada.length  &&
-        this.capacidade.toString().length  &&
-        this.dificuldade.length  &&
-        this.regularidade.length  &&
-        this.comprimento.toString().length  &&
-        this.largura.toString().length  &&
-        this.status.length 
+        this.nome.length &&
+        this.coordenada.length &&
+        this.capacidade.toString().length &&
+        this.dificuldade.length &&
+        this.regularidade.length &&
+        this.comprimento.toString().length &&
+        this.largura.toString().length &&
+        this.status.length
       ) {
         this.trilha = {
           nome: this.nome,
@@ -258,10 +262,12 @@ export default {
       this.dificuldade = this.trilha_dados.dificuldade;
       this.comprimento = this.trilha_dados.comprimento;
       this.largura = this.trilha_dados.largura;
-      this.coordenada1 = this.trilha_dados.coordenadas.split(";")[0];
-      this.coordenada2 = this.trilha_dados.coordenadas.split(";")[1];
-      this.coordenada3 = this.trilha_dados.coordenadas.split(";")[2];
-      this.coordenada4 = this.trilha_dados.coordenadas.split(";")[3];
+      [
+        this.coordenada1,
+        this.coordenada2,
+        this.coordenada3,
+        this.coordenada4,
+      ] = this.trilha_dados.coordenadas.split(";");
     },
   },
   async beforeMount() {

@@ -82,7 +82,6 @@
                     multiple
                     :url="getUrl"
                     accept=".jpg, image/*"
-                    @rejected="onRejected"
                   >
                     <template v-slot:header="scope">
                       <div class="row no-wrap items-center q-pa-sm q-gutter-xs">
@@ -193,7 +192,6 @@ export default {
         this.largura != null &&
         this.status != null
       ) {
-
         this.trilha = {
           nome: this.nome,
           coordenadas: this.coordenada,

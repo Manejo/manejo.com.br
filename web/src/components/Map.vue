@@ -1,70 +1,96 @@
-<template>
+<template >
+  <div class="text-light p-3 bg-info text-center">
     <GmapMap
-      :center="myCoordinates"
-      :zoom="zoom"
-      style="width: 100%; height: 700px; margin: 32px auto"
+      :center="{
+        lat: -8.002871,
+        lng: -34.945666,
+      }"
+      :zoom="15"
+      class="mapSty"
       ref="mapRef"
-      @dragend="handleDrag"
-    ></GmapMap>
+    >
+      <GmapMarker
+        :key="index"
+        v-for="(m, index) in markers"
+        :position="m.position"
+        :clickable="true"
+        :draggable="true"
+        @click="center = m.position"
+      />
+      <gmap-polygon :paths="paths"> </gmap-polygon>
+    </GmapMap>
+  </div>
 </template>
+<style lang="css" scoped>
+.mapSty {
+  background-color: "red";
+  padding: 20px;
+  height: 500px;
+  width: "100%";
+}
+</style>
 <script>
 export default {
+  name: "Map",
   data() {
     return {
       map: null,
       myCoordinates: {
-        lat: -8.015039,
-        lng: -34.944387,
+        lat: 0,
+        lng: 0,
       },
-      zoom: 7,
+      markers: [],
+      paths: [],
+      coordenadas: [],
     };
   },
   created() {
     // does the user have a saved center? use it instead of the default
-    if (localStorage.center) {
-      this.myCoordinates = JSON.parse(localStorage.center);
-    } else {
-      // get user's coordinates from browser request
-      this.$getLocation({})
-        .then((coordinates) => {
-          this.myCoordinates = coordinates;
-        })
-        .catch((error) => alert(error));
-    }
-    // does the user have a saved zoom? use it instead of the default
-    if (localStorage.zoom) {
-      this.zoom = parseInt(localStorage.zoom);
-    }
+    this.$getLocation({})
+      .then((coordinates) => {
+        this.myCoordinates = coordinates;
+      })
+      .catch((error) => alert(error));
   },
   mounted() {
-    // add the map to a data object
     this.$refs.mapRef.$mapPromise.then((map) => (this.map = map));
   },
   methods: {
-    handleDrag() {
-      // get center and zoom level, store in localstorage
-      let center = {
-        lat: this.map.getCenter().lat(),
-        lng: this.map.getCenter().lng(),
-      };
-      let zoom = this.map.getZoom();
-      localStorage.center = JSON.stringify(center);
-      localStorage.zoom = zoom;
+    drawDirection() {
+      this.paths = [
+        {
+          lat: parseFloat(this.coordenadas[0]),
+          lng: parseFloat(this.coordenadas[1]),
+        },
+        {
+          lat: parseFloat(this.coordenadas[2]),
+          lng: parseFloat(this.coordenadas[3]),
+        },
+      ];
+    },
+    clearMap() {},
+    async loadTrilha() {
+      await this.$axios
+        .get("http://localhost:3333/trilhas/" + this.$route.params.id_trilha)
+        .then((response) => {
+          this.trilha = response.data;
+          if (this.trilha == null) {
+            this.$alert("Não foi possível encontrar a trilha desejada.");
+            this.$router.push("/trilhas");
+          }
+        })
+        .catch((response) => (this.error_message = response));
+
+      try {
+        this.coordenadas = this.trilha.coordenadas.split(";");
+      } catch (error) {
+        return error;
+      }
+      this.drawDirection();
     },
   },
-  computed: {
-    mapCoordinates() {
-      if (!this.map) {
-        return {
-          lat: 0,
-          lng: 0,
-        };
-      }
-      return {
-        lat: this.map.getCenter().lat().toFixed(4),
-        lng: this.map.getCenter().lng().toFixed(4),
-      };
-    },
+  async beforeMount() {
+    await this.loadTrilha();
   },
 };
 </script>

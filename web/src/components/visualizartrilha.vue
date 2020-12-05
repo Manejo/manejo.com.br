@@ -31,57 +31,57 @@
                   class="inputs"
                   disable
                   standout="bg-primary text-white"
-                  :label="trilha_dados.nome"
+                  :value="trilha_dados.nome"
                 />
                 <q-input
                   class="inputs"
                   disable
                   standout="bg-primary text-white"
-                  :label="trilha_dados.status"
+                  :value="trilha_dados.status"
                 />
                 <q-input
                   class="inputs"
                   disable
                   standout="bg-primary text-white"
-                  :label="trilha_dados.regularidade"
+                  :value="trilha_dados.regularidade"
                 />
                 <q-input
                   class="inputs"
                   disable
                   standout="bg-primary text-white"
-                  :label="trilha_dados.capacidade"
+                  :value="trilha_dados.capacidade"
                 />
                 <q-input
                   class="inputs"
                   disable
                   standout="bg-primary text-white"
-                  :label="trilha_dados.dificuldade"
+                  :value="trilha_dados.dificuldade"
                 />
                 <q-input
                   class="inputs"
                   disable
                   standout="bg-primary text-white"
-                  :label="trilha_dados.comprimento"
+                  :value="trilha_dados.comprimento"
                 />
                 <q-input
                   class="inputs"
                   disable
                   standout="bg-primary text-white"
-                  :label="trilha_dados.largura"
+                  :value="trilha_dados.largura"
                 />
                 <div class="add-coordenada">
                   <q-input
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :label="trilha_dados.coordenadas.split(';')[0]"
+                    :value="this.coordenada1"
                     style="margin-right: 10px;"
                   />
                   <q-input
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :label="trilha_dados.coordenadas.split(';')[1]"
+                    :value="this.coordenada1"
                     style="margin-left: 10px;"
                   />
                 </div>
@@ -90,14 +90,14 @@
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :label="trilha_dados.coordenadas.split(';')[2]"
+                    :value="this.coordenada1"
                     style="margin-right: 10px;"
                   />
                   <q-input
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :label="trilha_dados.coordenadas.split(';')[3]"
+                    :value="this.coordenada1"
                     style="margin-left: 10px;"
                   />
                 </div>
@@ -205,9 +205,9 @@ export default {
 
       this.trilha_dados = this.caracteristica;
 
-      this.trilha_dados.trilha_id = this.trilha.id;
-      this.trilha_dados.nome = this.trilha.nome;
-      this.trilha_dados.coordenadas = this.trilha.coordenadas;
+      this.trilha_dados.trilha_id = this.trilha.id.toString();
+      this.trilha_dados.nome = this.trilha.nome.toString();
+      [this.coordenada1, this.coordenada2, this.coordenada3, this.coordenada4] = this.trilha.coordenadas.split(';');
 
       this.trilha_id = this.trilha_dados.trilha_id;
       this.caracteristica_id = this.trilha_dados.id;

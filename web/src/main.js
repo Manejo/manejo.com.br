@@ -1,22 +1,25 @@
 import Vue from 'vue'
-import App from './App'
+import App from './App.vue'
 import router from './router/routes'
 import './quasar'
-import VueGeolocation from 'vue-browser-geolocation'
 import axios from 'axios'
+import VueGeolocation from 'vue-browser-geolocation'
+import * as VueGoogleMaps from 'vue2-google-maps'
 import VueSimpleAlert from "vue-simple-alert"
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(VueGeolocation)
 Vue.use(VueSimpleAlert)
+// Vue.use(VueGeolocation)
 
-import * as VueGoogleMaps from 'vue2-google-maps'
 Vue.use(VueGoogleMaps, {
   load: {
-    key: 'AIzaSyAkTuS-_9iNFrEqta56WDmCZk1ArEahEQo'
-  }
+    key: 'AIzaSyBlrsAMRJQ5A4ajPVGvRgJkTNNWP-YnJMI',
+  },
+  installComponents: true,
 })
+
 
 new Vue({
   router,

@@ -9,19 +9,19 @@
         Cadastrar Trilha
       </button>
     </a>
-    <button class="btn">
+    <button class="btn" disabled>
       <span class="material-icons" style="height: 15px;">
         visibility
       </span>
       Visualizar Ocorrencias
     </button>
-    <button class="btn">
+    <button class="btn" disabled>
       <span class="material-icons" style="height: 15px;">
         visibility
       </span>
       Visualizar Relatorios
     </button>
-    <button class="btn">
+    <button class="btn" disabled>
       <span class="material-icons" style="height: 15px;">
         picture_as_pdf
       </span>

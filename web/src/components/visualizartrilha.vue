@@ -81,7 +81,7 @@
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :value="this.coordenada1"
+                    :value="this.coordenada2"
                     style="margin-left: 10px;"
                   />
                 </div>
@@ -90,14 +90,14 @@
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :value="this.coordenada1"
+                    :value="this.coordenada3"
                     style="margin-right: 10px;"
                   />
                   <q-input
                     class="inputs"
                     disable
                     standout="bg-primary text-white"
-                    :value="this.coordenada1"
+                    :value="this.coordenada4"
                     style="margin-left: 10px;"
                   />
                 </div>

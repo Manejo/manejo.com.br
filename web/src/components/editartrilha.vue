@@ -48,6 +48,7 @@
                   standout="bg-primary text-white"
                   v-model="capacidade"
                   :value="trilha_dados.capacidade"
+                  type="number"
                 />
                 <q-input
                   class="inputs"
@@ -60,12 +61,14 @@
                   standout="bg-primary text-white"
                   v-model="comprimento"
                   :value="trilha_dados.comprimento"
+                  type="number"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="largura"
                   :value="trilha_dados.largura"
+                  type="number"
                 />
                 <div class="add-coordenada">
                   <q-input

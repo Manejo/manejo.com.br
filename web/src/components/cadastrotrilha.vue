@@ -48,6 +48,7 @@
                   standout="bg-primary text-white"
                   v-model="capacidade"
                   label="Capacidade"
+                  type="number"
                 />
                 <q-input
                   class="inputs"
@@ -60,23 +61,29 @@
                   standout="bg-primary text-white"
                   v-model="comprimento"
                   label="Comprimento"
+                  type="number"
                 />
                 <q-input
                   class="inputs"
                   standout="bg-primary text-white"
                   v-model="largura"
                   label="Largura"
+                  type="number"
                 />
                 <div class="add-coordenada">
                   <q-input
                     class="inputs"
                     standout="bg-primary text-white"
                     v-model="coordenada"
-                    label="Coordenada"
+                    label="Coordenadas"
+                    placeholder="cordenada1;coordenada2;coordenada3;coordenada4"
                   />
-                  <q-btn class="button-add" round color="primary" icon="add" />
+                  <!-- <q-btn class="button-add" round color="primary" icon="add" /> -->
                 </div>
-                <div class="upload-image q-pa-md">
+
+
+
+                <!-- <div class="upload-image q-pa-md">
                   <q-uploader
                     label="Custom header"
                     multiple
@@ -151,7 +158,8 @@
                       </div>
                     </template>
                   </q-uploader>
-                </div>
+                </div> -->
+
               </div>
             </div>
           </div>
@@ -230,7 +238,7 @@ export default {
     },
 
     onReset() {
-      this.name = null;
+      this.nome = null;
       this.status = null;
       this.regularidade = null;
       this.capacidade = null;
